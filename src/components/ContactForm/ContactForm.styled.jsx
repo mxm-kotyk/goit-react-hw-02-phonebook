@@ -39,11 +39,11 @@ export const Label = styled.label`
   font-size: 16px;
   line-height: 140%;
   color: #1f1f1f;
-  ${StyledField}:focus + &,
-  ${StyledField}:not(:placeholder-shown) + & {
-    top: -14px;
-  }
-  ${StyledField}:focus + & {
-    color: #b92f2c;
-  }
+  // ${StyledField}:focus + &,
+  // ${StyledField}:not(:placeholder-shown) + & {
+  //   top: -14px;
+  // }
+  // ${StyledField}:focus + & {
+  //   color: #b92f2c;
+  // }
 `;
