@@ -3,6 +3,7 @@ import uniqid from 'uniqid';
 import { ContactForm } from './ContactForm';
 import { Filter } from './Filter';
 import { ContactList } from './ContactList';
+import { Wrapper, MainTitle, SecondaryTitle } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -56,14 +57,14 @@ export class App extends Component {
     const filteredContacts = filterContacts();
 
     return (
-      <>
-        <h2>Phonebook</h2>
+      <Wrapper>
+        <MainTitle>Phonebook</MainTitle>
         <ContactForm onSubmit={addContact} contacts={contacts} />
 
-        <h2>Contacts</h2>
+        <SecondaryTitle>Contacts</SecondaryTitle>
         <Filter filter={filter} onChange={handleInput} />
         <ContactList contacts={filteredContacts} onClick={deleteContact} />
-      </>
+      </Wrapper>
     );
   }
 }
