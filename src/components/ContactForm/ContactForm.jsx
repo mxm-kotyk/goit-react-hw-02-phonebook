@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   StyledForm,
   StyledField,
@@ -56,6 +57,7 @@ export const ContactForm = ({ onSubmit, contacts }) => {
       });
       return;
     }
+    Notify.success(`Contact ${name} added to contacts`);
     onSubmit(name, number);
   };
 
@@ -78,7 +80,7 @@ export const ContactForm = ({ onSubmit, contacts }) => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        {({ isSubmitting, getFieldProps }) => (
+        {({ getFieldProps }) => (
           <StyledForm>
             <FieldWrapper>
               <Label
@@ -122,9 +124,7 @@ export const ContactForm = ({ onSubmit, contacts }) => {
               />
               <FormError name="number" />
             </FieldWrapper>
-            <AddButton type="submit" disabled={isSubmitting}>
-              Add contact
-            </AddButton>
+            <AddButton type="submit">Add contact</AddButton>
           </StyledForm>
         )}
       </Formik>

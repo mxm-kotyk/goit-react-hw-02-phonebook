@@ -15,6 +15,7 @@ export const MainTitle = styled.h1`
 
 export const SecondaryTitle = styled.h2`
   margin-top: 56px;
+  margin-bottom: 24px;
   font-weight: 600;
   font-size: 24px;
   line-height: 36px;

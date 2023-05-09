@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { Contact } from './Contact/Contact';
+import { ContactsList } from './ContactList.styled';
 
 export const ContactList = ({ contacts, onClick }) => {
   return (
     <div>
-      <ul>
+      <ContactsList>
         {contacts.map(({ id, name, number }) => {
           return (
             <Contact
@@ -16,7 +17,7 @@ export const ContactList = ({ contacts, onClick }) => {
             />
           );
         })}
-      </ul>
+      </ContactsList>
     </div>
   );
 };

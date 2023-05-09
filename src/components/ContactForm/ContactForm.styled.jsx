@@ -8,17 +8,21 @@ export const StyledForm = styled(Form)`
 `;
 
 export const StyledField = styled(Field)`
-  width: 268px;
-  height: 20px;
+  box-sizing: border-box;
+  width: 302px;
+  height: 54px;
   padding: 16px;
   border: 1px solid #6998aa;
   border-radius: 8px;
+  font-family: inherit;
   font-size: 16px;
   line-height: 140%;
   color: #1f1f1f;
+  transition: all 150ms ease;
 
-  &:focus {
-    outline: 1px solid #051839;
+  &:focus-visible {
+    border: 1px solid #051839;
+    outline: 2px solid #6998aa;
   }
 `;
 
@@ -37,7 +41,6 @@ export const ErrorText = styled.p`
   color: #dc6000;
   background-color: #fff;
   border-radius: 8px;
-  // border: 1px solid #dc6000;
   z-index: 2;
 
   box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3),
@@ -87,6 +90,7 @@ export const AddButton = styled.button`
   width: 302px;
   height: 56px;
 
+  font-family: inherit;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -100,7 +104,7 @@ export const AddButton = styled.button`
   transition: all 150ms ease;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     background: #6998aa;
   }
   &:active {
