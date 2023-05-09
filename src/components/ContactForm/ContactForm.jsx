@@ -1,4 +1,6 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
+import classnames from 'classnames';
+import React, { useState } from 'react';
 import * as yup from 'yup';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
@@ -9,6 +11,7 @@ import {
   FieldWrapper,
   Label,
   ErrorText,
+  AddButton,
 } from './ContactForm.styled';
 
 const initialState = {
@@ -44,7 +47,6 @@ const FormError = ({ name }) => {
 
 export const ContactForm = ({ onSubmit, contacts }) => {
   const handleSubmit = (values, actions) => {
-    console.log(values);
     actions.resetForm();
     const { name, number } = values;
 
@@ -57,6 +59,16 @@ export const ContactForm = ({ onSubmit, contacts }) => {
     onSubmit(name, number);
   };
 
+  const [focusedField, setFocusedField] = useState(null);
+
+  const handleFieldFocus = fieldName => {
+    setFocusedField(fieldName);
+  };
+
+  const handleFieldBlur = () => {
+    setFocusedField(null);
+  };
+
   const nameInputId = uniqid();
   const numberInputId = uniqid();
   return (
@@ -66,19 +78,55 @@ export const ContactForm = ({ onSubmit, contacts }) => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <StyledForm>
-          <FieldWrapper>
-            <Label htmlFor={nameInputId}>Name</Label>
-            <StyledField type="text" name="name" id={nameInputId} required />
-            <FormError name="name" />
-          </FieldWrapper>
-          <FieldWrapper>
-            <Label htmlFor={numberInputId}>Number</Label>
-            <StyledField type="tel" name="number" id={numberInputId} required />
-            <FormError name="number" />
-          </FieldWrapper>
-          <button type="submit">Add contact</button>
-        </StyledForm>
+        {({ isSubmitting, getFieldProps }) => (
+          <StyledForm>
+            <FieldWrapper>
+              <Label
+                htmlFor={nameInputId}
+                className={classnames({
+                  'focused-label':
+                    focusedField === 'name' ||
+                    getFieldProps('name').value !== '',
+                })}
+              >
+                Name
+              </Label>
+              <StyledField
+                type="text"
+                name="name"
+                id={nameInputId}
+                required
+                onFocus={() => handleFieldFocus('name')}
+                onBlur={handleFieldBlur}
+              />
+              <FormError name="name" />
+            </FieldWrapper>
+            <FieldWrapper>
+              <Label
+                htmlFor={numberInputId}
+                className={classnames({
+                  'focused-label':
+                    focusedField === 'number' ||
+                    getFieldProps('number').value !== '',
+                })}
+              >
+                Number
+              </Label>
+              <StyledField
+                type="tel"
+                name="number"
+                id={numberInputId}
+                required
+                onFocus={() => handleFieldFocus('number')}
+                onBlur={handleFieldBlur}
+              />
+              <FormError name="number" />
+            </FieldWrapper>
+            <AddButton type="submit" disabled={isSubmitting}>
+              Add contact
+            </AddButton>
+          </StyledForm>
+        )}
       </Formik>
     </div>
   );
