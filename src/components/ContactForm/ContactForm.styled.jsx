@@ -103,11 +103,16 @@ export const AddButton = styled.button`
   cursor: pointer;
   transition: all 150ms ease;
 
-  &:hover,
   &:focus-visible {
     background: #6998aa;
   }
   &:active {
     background: #051839;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: #6998aa;
+    }
   }
 `;

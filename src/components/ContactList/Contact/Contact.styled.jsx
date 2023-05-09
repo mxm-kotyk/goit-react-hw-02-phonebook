@@ -37,13 +37,18 @@ export const CallButton = styled.a`
   border-radius: 8px;
   transition: background 200ms ease;
 
-  &:hover,
   &:focus-visible {
     background: #6998aa;
   }
 
   &:active {
     background: #051839;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: #6998aa;
+    }
   }
 `;
 
@@ -64,12 +69,17 @@ export const DeleteButton = styled.button`
   cursor: pointer;
   transition: background 200ms ease;
 
-  &:hover,
   &:focus-visible {
     background: #ff7906;
   }
 
   &:active {
     background: #d86b28;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: #ff7906;
+    }
   }
 `;
