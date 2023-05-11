@@ -1,6 +1,4 @@
 import { Formik, ErrorMessage } from 'formik';
-import classnames from 'classnames';
-import React, { useState } from 'react';
 import * as yup from 'yup';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
@@ -61,16 +59,6 @@ export const ContactForm = ({ onSubmit, contacts }) => {
     onSubmit(name, number);
   };
 
-  const [focusedField, setFocusedField] = useState(null);
-
-  const handleFieldFocus = fieldName => {
-    setFocusedField(fieldName);
-  };
-
-  const handleFieldBlur = () => {
-    setFocusedField(null);
-  };
-
   const nameInputId = uniqid();
   const numberInputId = uniqid();
   return (
@@ -80,53 +68,33 @@ export const ContactForm = ({ onSubmit, contacts }) => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        {({ getFieldProps }) => (
-          <StyledForm>
-            <FieldWrapper>
-              <Label
-                htmlFor={nameInputId}
-                className={classnames({
-                  'focused-label':
-                    focusedField === 'name' ||
-                    getFieldProps('name').value !== '',
-                })}
-              >
-                Name
-              </Label>
-              <StyledField
-                type="text"
-                name="name"
-                id={nameInputId}
-                required
-                onFocus={() => handleFieldFocus('name')}
-                onBlur={handleFieldBlur}
-              />
-              <FormError name="name" />
-            </FieldWrapper>
-            <FieldWrapper>
-              <Label
-                htmlFor={numberInputId}
-                className={classnames({
-                  'focused-label':
-                    focusedField === 'number' ||
-                    getFieldProps('number').value !== '',
-                })}
-              >
-                Number
-              </Label>
-              <StyledField
-                type="tel"
-                name="number"
-                id={numberInputId}
-                required
-                onFocus={() => handleFieldFocus('number')}
-                onBlur={handleFieldBlur}
-              />
-              <FormError name="number" />
-            </FieldWrapper>
-            <AddButton type="submit">Add contact</AddButton>
-          </StyledForm>
-        )}
+        <StyledForm>
+          <FieldWrapper>
+            <StyledField
+              type="text"
+              name="name"
+              id={nameInputId}
+              required
+              placeholder="."
+              className="styled-input"
+            />
+            <Label htmlFor={nameInputId}>Name</Label>
+            <FormError name="name" />
+          </FieldWrapper>
+          <FieldWrapper>
+            <StyledField
+              type="tel"
+              name="number"
+              id={numberInputId}
+              required
+              placeholder="."
+              className="styled-input"
+            />
+            <Label htmlFor={numberInputId}>Number</Label>
+            <FormError name="number" />
+          </FieldWrapper>
+          <AddButton type="submit">Add contact</AddButton>
+        </StyledForm>
       </Formik>
     </div>
   );

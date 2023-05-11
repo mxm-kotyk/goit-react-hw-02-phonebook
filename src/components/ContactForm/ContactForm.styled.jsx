@@ -24,6 +24,14 @@ export const StyledField = styled(Field)`
     border: 1px solid #051839;
     outline: 2px solid #6998aa;
   }
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  }
 `;
 
 export const FieldWrapper = styled.div`
@@ -70,7 +78,8 @@ export const Label = styled.label`
   color: #1f1f1f;
   transition: all 100ms ease;
 
-  &.focused-label {
+  .styled-input:focus + &,
+  .styled-input:not(:placeholder-shown) + & {
     top: 0px;
     font-size: 12px;
     line-height: 140%;
