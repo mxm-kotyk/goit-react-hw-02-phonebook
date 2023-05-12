@@ -14,7 +14,7 @@ const callIcon = `${sprite}#icon-phone`;
 const deleteIcon = `${sprite}#icon-delete`;
 
 export const Contact = ({ id, name, number, onClick }) => {
-  const normalizedNumberLink = `tel:${number.replace(/\D/g, '')}`;
+  const normalizedNumberLink = `tel:${number.replace(/[^\d+]/g, '')}`;
   return (
     <ContactItem>
       <ContactText>
